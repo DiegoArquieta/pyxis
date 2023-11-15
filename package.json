@@ -1,0 +1,21 @@
+{
+  "name": "pyxis-regression",
+  "version": "1.0.0",
+  "description": "Automated scripts to test pyxis app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "testing",
+    "qa",
+    "pyxis"
+  ],
+  "author": "Diego Arquieta",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.3.2",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  }
+}
