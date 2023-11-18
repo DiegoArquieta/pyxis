@@ -1,4 +1,4 @@
-import {login} from '../support/pom.ts'
+import {topMenu, mySavedReports, login} from '../support/pom.js'
 let username = Cypress.env('user_name')
 let password = Cypress.env('user_pass')
 let url = Cypress.env('pyxisdev')
@@ -15,13 +15,12 @@ describe('Test the login and landpage', () => {
     login(username, password);
    })
 
-  it.only('Validate upper menu', () => {
+  it.only('Validate My Saved Reports Page', () => {
     login(username, password);
-    
-    cy.contains('Overview')
-    cy.get(':nth-child(1) > .w-auto > .px-3 > .flex > .text-sm').should('have.text', 'a\u00a0')
-    cy.get(':nth-child(2) > .w-auto > .px-3 > .flex > .text-sm').should('have.text', 'Assets Library\u00a0')
+    topMenu();
+    mySavedReports();
   })
+  
 
   
 })
