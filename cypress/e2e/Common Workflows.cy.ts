@@ -1,4 +1,4 @@
-import {topMenu, mySavedReports, login, addKPI} from '../support/pom.ts'
+import {topMenu, mySavedReports, login, addKPI, removeKPI, logout} from '../support/pom.ts'
 let username = Cypress.env('user_name')
 let password = Cypress.env('user_pass')
 let url = Cypress.env('pyxisdev')
@@ -11,6 +11,7 @@ describe('Test the login and landpage', () => {
     // browser with a 1080p monitor
     cy.viewport(1980, 1080)
     cy.visit(urlQA)
+    login(username, password);
   })
   afterEach(function () {
     // Check if the test or a test step failed
@@ -19,30 +20,42 @@ describe('Test the login and landpage', () => {
       const screenshotName = `${this.currentTest.title}--${Cypress.spec.name}`;
       cy.screenshot(screenshotName);
     }
+    logout()
   });
 
-  it.skip('Login to Pyxis app fx', () => {
-    login(username, password);
-   })
    it.skip('Validate My Saved Reports Page', () => {
-    login(username, password);
     topMenu('Saved');
     mySavedReports();
   })
 
   it.skip('Validate Top Menu', () => {
-    login(username, password);
     topMenu('Saved');
     
   })
-  it('Go to dashboard and add a KPI with minimun requirements', () => {
-
-    login(username, password);
+  it.skip('Go to dashboard and add a KPI with minimun requirements', () => {
     // KPI parameters so far: Merchant, Period and Metrics
-    addKPI('NIKE', 'Latest Month', 'Units');
-  
-  
+    addKPI('LULULEMON', 'Latest Month', 'Units');
+    cy.wait(15000)
+  })
 
+  it.skip('Add "N" KPIs', () => {
+    let numberOfRuns = 5;
+    for (let i = 0; i < numberOfRuns; i++) {
+      // KPI parameters so far: Merchant, Period, and Metrics
+      addKPI('LULULEMON', 'Latest Month', 'Units');
+      cy.wait(15000);
+    }
+  })
   
-})
+  it('Remove the first KPI displayed', () => {
+  
+  let numberOfRuns = 3;
+    for (let i = 0; i < numberOfRuns; i++) {
+      cy.wait(20000)
+      removeKPI()
+  cy.visit(urlQA)
+  cy.wait(4000)
+
+}
+  })
 })

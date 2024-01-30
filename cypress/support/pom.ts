@@ -25,11 +25,17 @@ export function login(username, password){
    cy.get('span.text-3xl.font-bold')
    .should('be.visible').and('have.text', 'Welcome, Diego')
   }
-  
-  // and now somewhere in a test
-  //logout();
-  
 
+export function logout(){
+  cy.get('[data-cy="header-menu-initial-option"]').click();
+  // cy.get('div[_ngcontent-ctn-c10]').within(() => {
+  //   cy.contains('Sign out').click()
+  // })
+  cy.get('.bg-white > :nth-child(1) > :nth-child(3)').click()
+  cy.get('.okta-form-title.o-form-head').should('have.text', 'Welcome to Pyxis')
+  cy.get('.okta-form-label').should('have.text','Email\u00a0')
+
+}
   export function menuValidation (){
 
     cy.get('.my-auto > img').should('be.visible')
@@ -40,8 +46,6 @@ export function login(username, password){
   export function mySavedReports (){
 
     let idColumnName = cy.get('[col-id="name"] > .ag-header-cell-comp-wrapper > .ag-cell-label-container > .ag-header-cell-label > .ag-header-cell-text')
-    
-
     cy.contains('My Saved Reports').click()
     cy.get('.justify-between > .text-3xl').should('have.text', ' My Saved Reports ').click()
     cy.get('.flex-row > .flex > .w-full').invoke('attr', 'placeholder').should('contain', 'Search...')
@@ -63,9 +67,12 @@ export function login(username, password){
 
   export function topMenu (menuOption) {
     cy.get('.flex.flex-nowrap.justify-between.px-5.py-3.items-center').should('be.visible')
-    cy.get('.my-auto > img').should('be.visible')
-    cy.get('[ng-reflect-router-link="/assets/saved"]').should('be.visible').and('have.text', 'My Saved Reports')
-    cy.get('[ng-reflect-router-link="/assets/shared"]').should('be.visible').and('have.text', 'Shared With Me')
+    cy.get('div.m-auto > img').should('be.visible')
+    cy.get('.flex.flex-nowrap.justify-between.px-5.py-3.items-center')
+    //cy.get('[ng-reflect-router-link="/assets/saved"]').should('be.visible').and('have.text', 'My Saved Reports')
+    cy.get('.justify-left > :nth-child(3)').should('be.visible').and('have.text', 'My Saved Reports')
+    cy.get('.justify-left > :nth-child(4)').should('be.visible').and('have.text', 'Shared With Me')
+    //cy.get('[ng-reflect-router-link="/assets/shared"]').should('be.visible').and('have.text', 'Shared With Me')
     cy.get('.notification-icon-btn > .flex > .my-auto').should('be.visible')
     cy.get('.help-icon-btn > .flex > .my-auto').should('be.visible')
     cy.get('.ml-auto > lib-dropdown > .flex-col > .px-3 > div.flex > .text-sm').should('be.visible')
@@ -73,9 +80,12 @@ export function login(username, password){
 
     // Parameter-based logic
   if (menuOption === 'Saved') {
-    cy.get('[ng-reflect-router-link="/assets/saved"]').should('be.visible').and('have.text', 'My Saved Reports').click();
+    //cy.get('[ng-reflect-router-link="/assets/saved"]')
+    cy.get('.justify-left > :nth-child(3)').should('be.visible').and('have.text', 'My Saved Reports').click();
+    cy.get('.justify-between > .text-3xl').should('be.visible').and('have.text', ' My Saved Reports ')
   } else if (menuOption === 'Shared') {
-    cy.get('[ng-reflect-router-link="/assets/shared"]').should('be.visible').and('have.text', 'Shared With Me').click();
+    //cy.get('[ng-reflect-router-link="/assets/shared"]')
+    cy.get('.justify-left > :nth-child(4)').should('be.visible').and('have.text', 'Shared With Me').click();
     // Add code for handling "Shared" case
   } else {
     // Handle other cases or provide a default behavior
@@ -111,7 +121,7 @@ export function login(username, password){
     cy.contains('Add KPI').click()
     cy.contains('RAKUTEN QA APPAREL ACTIVEWEAR ERECEIPT').click()
     cy.contains('Create KPI').click()
-    cy.wait(1000)
+    cy.wait(10000)
     let nameMerchant = merchant
     cy.get('.cdk-virtual-scroll-viewport').within(() => {
     if (merchant === 'ALO YOGA') {
@@ -204,4 +214,17 @@ export function login(username, password){
     cy.log(nameMerchant)
     cy.contains('Apply Selections').click()
     cy.get('#toast > .ml-3').should('have.text', ' Your report has been saved. ')
+  }
+
+  export function removeKPI () {
+
+    cy.get('#cdk-drop-list-1').within(() => {
+      cy.get('.kpi-menu-icon.bg-transparent').click();
+      cy.contains('Delete KPI').click()
+      cy.wait(2000)
+      
+
+
+    })
+    cy.contains("Yes, I'm sure").click()
   }
