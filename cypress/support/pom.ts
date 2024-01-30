@@ -27,6 +27,7 @@ export function login(username, password){
   }
 
 export function logout(){
+  cy.wait(3000)
   cy.get('[data-cy="header-menu-initial-option"]').click();
   // cy.get('div[_ngcontent-ctn-c10]').within(() => {
   //   cy.contains('Sign out').click()
@@ -91,7 +92,7 @@ export function logout(){
     // Handle other cases or provide a default behavior
     // You can also throw an error for an unsupported parameter
     cy.log(`Unsupported action: ${menuOption}`);
-    throw new Error('The condition was not met!')
+    throw new Error('Validate your parameter, it probably has a typo!')
   }
   }
   export function createReportbutton (reportOption) {
@@ -141,7 +142,7 @@ export function logout(){
   cy.wait(5000)
   let namePeriod = period
     cy.get('.cdk-virtual-scroll-viewport').within(() => {
-    if (period === 'Latest 4 weeks') {
+    if (period === 'Latest 4 Weeks') {
       cy.contains(namePeriod).click( {force: true})
       
     } else if (period === 'Latest Month') {
@@ -228,3 +229,32 @@ export function logout(){
     })
     cy.contains("Yes, I'm sure").click()
   }
+
+  export function accountSettings (optionSettings) {
+    cy.get('[data-cy="header-menu-initial-option"]').click();
+    cy.get(':nth-child(2) > .text-gray-500').should('have.text','Settings').click()
+    cy.wait(2000)
+    cy.get('[data-cy="page-title"]').should('have.text',' Settings ')
+    cy.get('[data-cy="settings-account-userProfile"]').should('have.text',' User Profile ')
+    cy.get('.w-96').within(() => {
+      cy.get('[href="/settings/account"] > .font-normal').should('have.text',' Account ')
+      cy.get('[href="/settings/notifications"] > .font-normal').should('have.text',' Notifications ')
+      cy.get('[href="/settings/user-preferences"] > .font-normal').should('have.text',' User Preferences ')
+    })
+    if (optionSettings === 'Notifications') {
+    cy.get('.w-96').within(() => {
+      cy.get('[href="/settings/notifications"] > .font-normal').should('have.text',' Notifications ').click()
+      
+
+    })
+    cy.get('[data-cy="settings-notifications-form"]').within(() => {
+      cy.get(':nth-child(1)').should('have.text',' KPI Alerts ')
+      cy.get('.py-4 > .text-sm').should('have.text',' Notify when a KPI has increased or decreased a defined threshold value ')
+      cy.get('[data-cy="settings-notifications-kpi"] > .flex > .flex-grow > [data-cy="settings-notifications-push-toggle"] > .relative > .w-10')
+
+    })
+  }
+
+
+    }
+  

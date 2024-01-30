@@ -1,4 +1,4 @@
-import {topMenu, mySavedReports, login, addKPI, removeKPI, logout} from '../support/pom.ts'
+import {topMenu, mySavedReports, login, addKPI, removeKPI, logout, accountSettings} from '../support/pom.ts'
 let username = Cypress.env('user_name')
 let password = Cypress.env('user_pass')
 let url = Cypress.env('pyxisdev')
@@ -25,16 +25,22 @@ describe('Test the login and landpage', () => {
 
    it.skip('Validate My Saved Reports Page', () => {
     topMenu('Saved');
-    mySavedReports();
+    //mySavedReports();
   })
 
   it.skip('Validate Top Menu', () => {
-    topMenu('Saved');
+    topMenu('');
     
   })
   it.skip('Go to dashboard and add a KPI with minimun requirements', () => {
     // KPI parameters so far: Merchant, Period and Metrics
     addKPI('LULULEMON', 'Latest Month', 'Units');
+    cy.wait(15000)
+  })
+
+  it.skip('Go to dashboard and add a KPI with minimun requirements', () => {
+    // KPI parameters so far: Merchant, Period and Metrics
+    addKPI('NIKE', 'Latest 4 weeks', 'Sales');
     cy.wait(15000)
   })
 
@@ -47,7 +53,7 @@ describe('Test the login and landpage', () => {
     }
   })
   
-  it('Remove the first KPI displayed', () => {
+  it.skip('Remove "N" numbers of KPI, by deleting the first one several times', () => {
   
   let numberOfRuns = 3;
     for (let i = 0; i < numberOfRuns; i++) {
@@ -58,4 +64,9 @@ describe('Test the login and landpage', () => {
 
 }
   })
+  it('Account settings', () => {
+        cy.wait(1000)
+        accountSettings('Notifications')
+        
+    })
 })

@@ -2,3 +2,5 @@ node_modules
 cypress/cypress.env.json
 cypress/screenshots
 cypress.env.json
+.DS_Store
+cypress/.DS_Store
