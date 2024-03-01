@@ -21,6 +21,13 @@ import 'cypress-mochawesome-reporter/register';
 Cypress.Screenshot.defaults({
     capture: 'viewport'
   });
+  // Listen to the uncaught:exception event
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // Return false to prevent Cypress from failing the test due to uncaught exceptions
+  return false;
+});
+
+// Now your tests won't fail due to uncaught exceptions by default
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

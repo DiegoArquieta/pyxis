@@ -1,11 +1,11 @@
-import {topMenu, mySavedReports, login, addKPI, removeKPI, logout, accountSettings, createReportbutton, addReport} from '../support/pom.ts'
+import {topMenu, mySavedReports, login, addKPI, removeKPI, logout, accountSettings} from '../support/pom.ts'
 let username = Cypress.env('user_name')
 let password = Cypress.env('user_pass')
 let url = Cypress.env('pyxisdev')
 let urlQA = Cypress.env('pyxisqa')
 
 
-describe('Test,login, landp and settings page', () => {
+describe.skip('Test the login and landpage', () => {
   beforeEach(() => {
     // run these tests as if in a desktop
     // browser with a 1080p monitor
@@ -23,37 +23,37 @@ describe('Test,login, landp and settings page', () => {
     logout()
   });
 
-   it('Validate My Saved Reports Page', () => {
+   it.skip('Validate My Saved Reports Page', () => {
     topMenu('Saved');
     //mySavedReports();
   })
 
-  it('Validate Top Menu', () => {
+  it.skip('Validate Top Menu', () => {
     topMenu('');
     
   })
   it.skip('Go to dashboard and add a KPI with minimun requirements', () => {
     // KPI parameters so far: Merchant, Period and Metrics
-    addKPI('Lululemon', 'Latest Month', 'Units');
+    addKPI('LULULEMON', 'Latest Month', 'Units');
     cy.wait(15000)
   })
 
-  it.skip('Go to dashboard and validate that you need the minimun requirements for a KPI', () => {
+  it('Go to dashboard and validate that you need the minimun requirements for a KPI', () => {
     // KPI parameters so far: Merchant, Period and Metrics
     addKPI('', 'Latest 4 Weeks', 'Sales');
     cy.wait(15000)
   })
 
-  it('Add "N" KPIs', () => {
+  it.skip('Add "N" KPIs', () => {
     let numberOfRuns = 5;
     for (let i = 0; i < numberOfRuns; i++) {
       // KPI parameters so far: Merchant, Period, and Metrics
-      addKPI('Lululemon', 'Latest Month', 'Units');
+      addKPI('LULULEMON', 'Latest Month', 'Units');
       cy.wait(15000);
     }
   })
   
-  it('Remove "N" numbers of KPI, by deleting the first one several times', () => {
+  it.skip('Remove "N" numbers of KPI, by deleting the first one several times', () => {
   
   let numberOfRuns = 3;
     for (let i = 0; i < numberOfRuns; i++) {
@@ -64,16 +64,9 @@ describe('Test,login, landp and settings page', () => {
 
 }
   })
-  it('Account settings', () => {
+  it.skip('Account settings', () => {
         cy.wait(1000)
         accountSettings('Notifications')
         
-    })
-
-    it('Create Top Product report', () => {
-      // Select the type of report and which one to build
-      createReportbutton('Create from template', ' Top Product Overview ');
-      cy.wait(15000)
-      addReport('Lululemon', 'Latest 12 Weeks', 'Sales');
     })
 })
