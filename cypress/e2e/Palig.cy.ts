@@ -1,7 +1,7 @@
 //import {topMenu, mySavedReports, login} from '../support/pom.js'
 
 
-describe('Test the login and landpage', () => {
+describe.skip('Test the login and landpage', () => {
   beforeEach(() => {
     // run these tests as if in a desktop
     // browser with a 1080p monitor

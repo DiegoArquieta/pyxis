@@ -23,17 +23,17 @@ describe('Test all the KPI functionality', () => {
     logout()
   });
 
-  it.skip('Go to dashboard and add a KPI with minimun requirements', () => {
+  it('Go to dashboard and add a KPI with minimun requirements', () => {
     // KPI parameters so far: Merchant, Period and Metrics
     addKPI('Lululemon', 'Latest Month', 'Sales');
     cy.wait(15000)
   })
-  it.skip('Go to dashboard and add a KPI with minimun requirements', () => {
+  it('Go to dashboard and add a KPI with minimun requirements', () => {
     // KPI parameters so far: Merchant, Period and Metrics
     addKPI('Nike', 'Latest 52 Weeks', 'Units');
     cy.wait(15000)
   })
-  it.skip('Go to dashboard and validate that you need the minimum requirements for a KPI (Merchant missing)', () => {
+  it('Go to dashboard and validate that you need the minimum requirements for a KPI (Merchant missing)', () => {
     try {
       // KPI parameters so far: Merchant, Period, and Metrics
       addKPI('', 'Latest 4 Weeks', 'Sales');
@@ -43,7 +43,7 @@ describe('Test all the KPI functionality', () => {
       cy.log(`Error: ${error.message}`);
     }
   });
-  it.skip('Go to dashboard and validate that you need the minimum requirements for a KPI(Period missing)', () => {
+  it('Go to dashboard and validate that you need the minimum requirements for a KPI(Period missing)', () => {
     try {
       // KPI parameters so far: Merchant, Period, and Metrics
       addKPI('Nike', '', '');
@@ -54,21 +54,20 @@ describe('Test all the KPI functionality', () => {
     }
   });
 
-  it.skip('Go to dashboard and validate that you need the minimum requirements for a KPI(Merchant missing)', () => {
+  it('Go to dashboard and validate that you need the minimum requirements for a KPI(Metrics missing)', () => {
     try {
       // KPI parameters so far: Merchant, Period, and Metrics
-      addKPI('', 'Latest 4 weeks', 'Sales');
+      addKPI('Under Armour', 'Latest 4 weeks', '');
       cy.wait(15000);
     } catch (error) {
       // Handle the error, log it, or perform any other necessary action
       cy.log(`Error: ${error.message}`);
     }
   });
-66
   
 
-  it.skip('Add "N" KPIs', () => {
-    let numberOfRuns = 3;
+  it('Add "N" KPIs', () => {
+    let numberOfRuns = 5;
     for (let i = 0; i < numberOfRuns; i++) {
       // KPI parameters so far: Merchant, Period, and Metrics
       addKPI('Lululemon', 'Latest Month', 'Sales');
@@ -78,7 +77,7 @@ describe('Test all the KPI functionality', () => {
   
   it('Remove "N" numbers of KPI, by deleting the first one several times', () => {
   
-  let numberOfRuns = 106;
+  let numberOfRuns = 4;
     for (let i = 0; i < numberOfRuns; i++) {
       cy.wait(8000)
       removeKPI()
