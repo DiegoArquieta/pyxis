@@ -369,6 +369,11 @@ cy.get(':nth-child(2) > .flex-wrap').invoke('text').then((actualText) => {
     cy.get('.min-w-20 > .flex').should('be.visible')
     cy.get('[data-cy="Top_N_Products_Dropdown"] > .flex-col > .border').should('be.visible')
     cy.get('[data-cy="Rank_by_Dropdown"] > .flex-col > .border').should('be.visible')
+    cy.get('[data-cy="View_Metrics_Dropdown"] > .flex-col > .border').should('be.visible')
+    cy.get('.flex.flex-col > .gap-2 > .font-medium > .flex-col > .px-3 > .flex > .text-sm').should('be.visible').and('have.text', ' Export Report ')
+    cy.get('app-top-product-chart-section > lib-report-layout > .shadow-sm > .grid-flow-row > .grid > .col-span-2 > .truncate').should('be.visible').and('have.text', ' Product Deep Dive ')
+    cy.get('.am5-modal-content').should('be.visible').and('have.text', 'Select a product description above to see how its sales and average selling price have trended over time')
+
   
   
   

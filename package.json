@@ -19,6 +19,6 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "cypress-mochawesome-reporter": "^3.8.1"
+    "cypress-mochawesome-reporter": "^3.8.2"
   }
 }
