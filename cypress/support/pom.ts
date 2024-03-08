@@ -343,10 +343,6 @@ export function addReport (merchant, period, metrics) {
       cy.log('No matching Period value was selected')
     }
   })
- 
-
-    
-   
     //Validate selections made
     cy.get(':nth-child(1) > .flex-wrap > .flex > .text-primary-800').should('have.text', 'Test Orion Apparel Activewear Online')
     cy.get(':nth-child(2) > button.flex > .truncate').should('have.text', ' Merchant ')
@@ -364,5 +360,45 @@ cy.get(':nth-child(2) > .flex-wrap').invoke('text').then((actualText) => {
     cy.log(nameMerchant)
     cy.contains('Apply Selections').click()
     cy.get('.flex > .text-3xl').should('have.text', ' Top Product Overview ')
-  }
+    cy.wait(15000)
+    //Top product elements
+    cy.get('.flex-wrap').should('have.text', ' Rank top performing products across selected characteristics and deep dive into individual products to see their sales and price trends over time\n')
+    cy.get('[data-cy="pin-button"] > .bg-white').should('be.visible') 
+    cy.get('[data-cy="share-with-me-remove-button"] > .bg-white').should('be.visible')
+    cy.contains('Save Report').should('be.visible')
+    cy.get('.min-w-20 > .flex').should('be.visible')
+    cy.get('[data-cy="Top_N_Products_Dropdown"] > .flex-col > .border').should('be.visible')
+    cy.get('[data-cy="Rank_by_Dropdown"] > .flex-col > .border').should('be.visible')
   
+  
+  
+  }
+
+  export function addKPI2 (merchant, period, metrics) {
+    // Validation for required parameters
+    if (merchant === '' || period === '') {
+        throw new Error('Required information is missing');
+    }
+
+    cy.contains('Add KPI').click();
+    cy.contains('Test Orion Apparel Activewear Online').click()
+    // Removing hardcoded click action since we'll get merchant name from the JSON file
+    cy.contains('Create KPI').click();
+    cy.wait(15000);
+
+    // Load the merchants JSON file
+    cy.fixture('merchants.json').then((data) => {
+        // Find the merchant object in the PYXIS_MERCHANT array
+        const merchantObj = data.PYXIS_MERCHANT.find(m => m.vl_cd === merchant);
+
+        if (merchantObj) {
+            // If the merchant is found, use its vl_cd value to click on the merchant name
+            cy.get('.cdk-virtual-scroll-viewport').within(() => {
+                cy.contains(merchantObj.vl_cd).click({force: true});
+            });
+        } else {
+            // Optional: handle the case where the merchant is not found in the JSON file
+            throw new Error(`Merchant ${merchant} not found in JSON file`);
+        }
+    });
+}

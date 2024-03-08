@@ -32,39 +32,8 @@ describe('Test,login, landp and settings page', () => {
     topMenu('');
     
   })
-  it.skip('Go to dashboard and add a KPI with minimun requirements', () => {
-    // KPI parameters so far: Merchant, Period and Metrics
-    addKPI('Lululemon', 'Latest Month', 'Units');
-    cy.wait(15000)
-  })
 
-  it.skip('Go to dashboard and validate that you need the minimun requirements for a KPI', () => {
-    // KPI parameters so far: Merchant, Period and Metrics
-    addKPI('', 'Latest 4 Weeks', 'Sales');
-    cy.wait(15000)
-  })
-
-  it('Add "N" KPIs', () => {
-    let numberOfRuns = 5;
-    for (let i = 0; i < numberOfRuns; i++) {
-      // KPI parameters so far: Merchant, Period, and Metrics
-      addKPI('Lululemon', 'Latest Month', 'Units');
-      cy.wait(15000);
-    }
-  })
-  
-  it('Remove "N" numbers of KPI, by deleting the first one several times', () => {
-  
-  let numberOfRuns = 3;
-    for (let i = 0; i < numberOfRuns; i++) {
-      cy.wait(20000)
-      removeKPI()
-  cy.visit(urlQA)
-  cy.wait(4000)
-
-}
-  })
-  it('Account settings', () => {
+  it('Account settings notifications', () => {
         cy.wait(1000)
         accountSettings('Notifications')
         

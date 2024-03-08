@@ -23,7 +23,7 @@ describe('Test all the KPI functionality', () => {
     logout()
   });
 
-  it.skip('Go to dashboard and add a KPI with minimun requirements', () => {
+  it('Go to dashboard and add a KPI with minimun requirements', () => {
     // KPI parameters so far: Merchant, Period and Metrics
     addKPI('Lululemon', 'Latest Month', 'Sales');
     cy.wait(15000)
@@ -33,7 +33,7 @@ describe('Test all the KPI functionality', () => {
     addKPI('Nike', 'Latest 52 Weeks', 'Units');
     cy.wait(15000)
   })
-  it.skip('Go to dashboard and validate that you need the minimum requirements for a KPI (Merchant missing)', () => {
+  it('Go to dashboard and validate that you need the minimum requirements for a KPI (Merchant missing)', () => {
     try {
       // KPI parameters so far: Merchant, Period, and Metrics
       addKPI('', 'Latest 4 Weeks', 'Sales');
@@ -46,7 +46,7 @@ describe('Test all the KPI functionality', () => {
   it('Go to dashboard and validate that you need the minimum requirements for a KPI(Period missing)', () => {
     try {
       // KPI parameters so far: Merchant, Period, and Metrics
-      addKPI('Lululemon', '', '');
+      addKPI('Nike', '', '');
       cy.wait(15000);
     } catch (error) {
       // Handle the error, log it, or perform any other necessary action
@@ -54,7 +54,7 @@ describe('Test all the KPI functionality', () => {
     }
   });
 
-  it.skip('Go to dashboard and validate that you need the minimum requirements for a KPI(Period missing)', () => {
+  it('Go to dashboard and validate that you need the minimum requirements for a KPI(Merchant missing)', () => {
     try {
       // KPI parameters so far: Merchant, Period, and Metrics
       addKPI('', 'Latest 4 weeks', 'Sales');
