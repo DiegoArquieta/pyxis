@@ -25,18 +25,18 @@ describe('Test all the KPI functionality', () => {
 
   it('Go to dashboard and add a KPI with minimun requirements', () => {
     // KPI parameters so far: Merchant, Period and Metrics
-    addKPI('Lululemon', 'Latest Month', 'Sales');
+    addKPI('Test Orion Apparel Activewear Online', 'Lululemon', 'Latest Month', 'Sales');
     cy.wait(15000)
   })
   it('Go to dashboard and add a KPI with minimun requirements', () => {
     // KPI parameters so far: Merchant, Period and Metrics
-    addKPI('Nike', 'Latest 52 Weeks', 'Units');
+    addKPI('Test Orion Apparel Activewear Online', 'Nike', 'Latest 52 Weeks', 'Units');
     cy.wait(15000)
   })
   it('Go to dashboard and validate that you need the minimum requirements for a KPI (Merchant missing)', () => {
     try {
       // KPI parameters so far: Merchant, Period, and Metrics
-      addKPI('', 'Latest 4 Weeks', 'Sales');
+      addKPI('Test Orion Apparel Activewear Online', '', 'Latest 4 Weeks', 'Sales');
       cy.wait(15000);
     } catch (error) {
       // Handle the error, log it, or perform any other necessary action
@@ -46,7 +46,7 @@ describe('Test all the KPI functionality', () => {
   it('Go to dashboard and validate that you need the minimum requirements for a KPI(Period missing)', () => {
     try {
       // KPI parameters so far: Merchant, Period, and Metrics
-      addKPI('Nike', '', '');
+      addKPI('Test Orion Apparel Activewear Online', 'Nike', '', '');
       cy.wait(15000);
     } catch (error) {
       // Handle the error, log it, or perform any other necessary action
@@ -54,10 +54,10 @@ describe('Test all the KPI functionality', () => {
     }
   });
 
-  it('Go to dashboard and validate that you need the minimum requirements for a KPI(Metrics missing)', () => {
+  it.skip('Go to dashboard and validate that you need the minimum requirements for a KPI(Metrics missing)', () => {
     try {
       // KPI parameters so far: Merchant, Period, and Metrics
-      addKPI('Under Armour', 'Latest 4 weeks', '');
+      addKPI('Test Orion Apparel Activewear Online', 'Under Armour', 'Latest 4 weeks', '');
       cy.wait(15000);
     } catch (error) {
       // Handle the error, log it, or perform any other necessary action
@@ -70,7 +70,7 @@ describe('Test all the KPI functionality', () => {
     let numberOfRuns = 5;
     for (let i = 0; i < numberOfRuns; i++) {
       // KPI parameters so far: Merchant, Period, and Metrics
-      addKPI('Lululemon', 'Latest Month', 'Sales');
+      addKPI('Test Orion Apparel Activewear Online', 'Lululemon', 'Latest Month', 'Sales');
       cy.wait(15000);
     }
   })

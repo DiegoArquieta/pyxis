@@ -43,6 +43,6 @@ describe('Test,login, landp and settings page', () => {
       // Select the type of report and which one to build
       createReportbutton('Create from template', ' Top Product Overview ');
       cy.wait(15000)
-      addReport('Lululemon', 'Latest 12 Weeks', 'Sales');
+      addReport('Test Orion Apparel Activewear Online', 'Lululemon', 'Latest 12 Weeks', 'Sales');
     })
 })

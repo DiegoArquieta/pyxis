@@ -1,4 +1,4 @@
-import {addReport, mySavedReports, login, addKPI, removeKPI, logout, accountSettings, createReportbutton} from '../support/pom.ts'
+import {addReport, login, logout, createReportbutton} from '../support/pom.ts'
 let username = Cypress.env('user_name')
 let password = Cypress.env('user_pass')
 let url = Cypress.env('pyxisdev')
@@ -27,6 +27,6 @@ describe('Create Top Overview report', () => {
     // Select the type of report and which one to build
     createReportbutton('Create from template', ' Top Product Overview ');
     cy.wait(15000)
-    addReport('Lululemon', 'Latest 12 Weeks', 'Sales');
+    addReport('Test Orion Apparel Activewear Online', 'Lululemon', 'Latest 12 Weeks', 'Sales');
   })
 })

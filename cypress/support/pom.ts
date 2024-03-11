@@ -126,28 +126,43 @@ export function createReportbutton (reportOption, templateName) {
 
   }
 //, geography, customer, product, period, metrics
-export function addKPI (merchant, period, metrics) {
+export function addKPI (dataSource, merchant, period, metrics) {
       // Validation for required parameters
   if ( merchant === '' || period === '') {
     throw new Error('Required information is missing');
     
   }
     cy.contains('Add KPI').click()
-    cy.contains('Test Orion Apparel Activewear Online').click()
+    cy.contains(dataSource).click()
     cy.contains('Create KPI').click()
     cy.wait(15000)
-    let nameMerchant = merchant
-    cy.get('.cdk-virtual-scroll-viewport').within(() => {
-    if (merchant === 'Alo Yoga') {
-      cy.contains(nameMerchant).click( {force: true})
-    } else if (merchant === 'Lululemon') {
-      cy.contains(nameMerchant).click( {force: true})
-    } else if (merchant === 'Nike') {
-      cy.contains(nameMerchant).click( {force: true})
-    } else if (merchant === 'Under Armour') {
-      cy.contains(nameMerchant).click( {force: true})
+     let nameMerchant = merchant
+  //   cy.get('.cdk-virtual-scroll-viewport').within(() => {
+  //   if (merchant === 'Alo Yoga') {
+  //     cy.contains(nameMerchant).click( {force: true})
+  //   } else if (merchant === 'Lululemon') {
+  //     cy.contains(nameMerchant).click( {force: true})
+  //   } else if (merchant === 'Nike') {
+  //     cy.contains(nameMerchant).click( {force: true})
+  //   } else if (merchant === 'Under Armour') {
+  //     cy.contains(nameMerchant).click( {force: true})
+  //   }
+  // })
+  // Load the merchants JSON file
+  cy.fixture('merchants.json').then((data) => {
+    // Find the merchant object in the PYXIS_MERCHANT array
+    let merchantObj = data.PYXIS_MERCHANT.find(m => m.vl_cd === merchant);
+
+    if (merchantObj) {
+        // If the merchant is found, use its vl_cd value to click on the merchant name
+        cy.get('.cdk-virtual-scroll-viewport').within(() => {
+            cy.contains(merchantObj.vl_cd).click({force: true});
+        });
+    } else {
+        // Optional: handle the case where the merchant is not found in the JSON file
+        throw new Error(`Merchant ${merchant} not found in JSON file`);
     }
-  })
+})
     //cy.contains('ALO YOGA').click( {force: true})
     cy.get('.mx-6 > .flex-row').within(() => {
     cy.contains('Period').click()
@@ -301,14 +316,14 @@ cy.get('.gap-8 > .text-gray-400').invoke('text').then((actualText) => {
 
     }
 
-export function addReport (merchant, period, metrics) {
+export function addReport (dataSource, merchant, period, metrics) {
       // Validation for required parameters
   if ( merchant === '' || period === '') {
     throw new Error('Required information is missing');
     
   }
     //cy.contains('Add KPI').click()
-    cy.contains('Test Orion Apparel Activewear Online').click()
+    cy.contains(dataSource).click()
     cy.contains('Continue').click()
     cy.wait(10000)
     let nameMerchant = merchant
