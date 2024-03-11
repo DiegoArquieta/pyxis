@@ -40,13 +40,6 @@ export function logout(){
   cy.get('.okta-form-label').should('have.text','Email\u00a0')
 
 }
-export function menuValidation (){
-
-    cy.get('.my-auto > img').should('be.visible')
-    cy.get('[ng-reflect-router-link="/assets/saved"]').should('be.visible').and('have.text', 'My Saved Reports')
-    cy.get('[ng-reflect-router-link="/assets/shared"]').should('be.visible').and('have.text', 'Shared With Me')
-    }
-
 export function mySavedReports (){
 
     let idColumnName = cy.get('[col-id="name"] > .ag-header-cell-comp-wrapper > .ag-cell-label-container > .ag-header-cell-label > .ag-header-cell-text')
@@ -169,20 +162,20 @@ export function addKPI (dataSource, merchant, period, metrics) {
   })
   cy.wait(5000)
   let namePeriod = period
+  cy.fixture('periods.json').then((data) => {
+    // Find the period object in the PERIODS array
+    const periodObj = data.PERIODS.find(p => p.key === period);
+
     cy.get('.cdk-virtual-scroll-viewport').within(() => {
-    if (period === 'Latest 4 Weeks') {
-      cy.contains(namePeriod).click( {force: true})
-      
-    } else if (period === 'Latest Month') {
-      cy.contains(namePeriod).click( {force: true})
-    } else if (period === 'Latest 52 weeks') {
-      cy.contains(namePeriod).click( {force: true})
-    } else if (period === 'Latest 12 weeks') {
-      cy.contains(namePeriod).click( {force: true})
-    } else {
-      cy.log('No matching Period value was selected')
-    }
-  })
+        if (periodObj) {
+            // If the period is found, use its value to click on the period name
+            cy.contains(periodObj.value).click({force: true});
+        } else {
+            // Log a message if no matching period value was selected
+            cy.log('No matching Period value was selected');
+        }
+    });
+});
    //Select Metric notifications on the Data Source meu
    cy.get('.mx-6 > .flex-row').within(() => {
       cy.contains('Metric Notifications').click()
@@ -327,37 +320,40 @@ export function addReport (dataSource, merchant, period, metrics) {
     cy.contains('Continue').click()
     cy.wait(10000)
     let nameMerchant = merchant
-    cy.get('.cdk-virtual-scroll-viewport').within(() => {
-    if (merchant === 'Alo Yoga') {
-      cy.contains(nameMerchant).click( {force: true})
-    } else if (merchant === 'Lululemon') {
-      cy.contains(nameMerchant).click( {force: true})
-    } else if (merchant === 'Nike') {
-      cy.contains(nameMerchant).click( {force: true})
-    } else if (merchant === 'Under Armour') {
-      cy.contains(nameMerchant).click( {force: true})
-    }
-  })
+    cy.fixture('merchants.json').then((data) => {
+      // Find the merchant object in the PYXIS_MERCHANT array
+      const merchantObj = data.PYXIS_MERCHANT.find(m => m.vl_cd === merchant);
+
+      if (merchantObj) {
+          // If the merchant is found, use its vl_cd value to click on the merchant name
+          cy.get('.cdk-virtual-scroll-viewport').within(() => {
+              cy.contains(merchantObj.vl_cd).click({force: true});
+          });
+      } else {
+          // Optional: handle the case where the merchant is not found in the JSON file
+          throw new Error(`Merchant ${merchant} not found in JSON file`);
+      }
+  });
     //cy.contains('ALO YOGA').click( {force: true})
     cy.get('.mx-6 > .flex-row').within(() => {
     cy.contains('Period').click()
   })
   cy.wait(5000)
   let namePeriod = period
+  cy.fixture('periods.json').then((data) => {
+    // Find the period object in the PERIODS array
+    const periodObj = data.PERIODS.find(p => p.key === period);
+
     cy.get('.cdk-virtual-scroll-viewport').within(() => {
-    if (period === 'Latest 4 Weeks') {
-      cy.contains(namePeriod).click( {force: true})
-      
-    } else if (period === 'Latest Month') {
-      cy.contains(namePeriod).click( {force: true})
-    } else if (period === 'Latest 52 weeks') {
-      cy.contains(namePeriod).click( {force: true})
-    } else if (period === 'Latest 12 Weeks') {
-      cy.contains(namePeriod).click( {force: true})
-    } else {
-      cy.log('No matching Period value was selected')
-    }
-  })
+        if (periodObj) {
+            // If the period is found, use its value to click on the period name
+            cy.contains(periodObj.value).click({force: true});
+        } else {
+            // Log a message if no matching period value was selected
+            cy.log('No matching Period value was selected');
+        }
+    });
+});
     //Validate selections made
     cy.get(':nth-child(1) > .flex-wrap > .flex > .text-primary-800').should('have.text', 'Test Orion Apparel Activewear Online')
     cy.get(':nth-child(2) > button.flex > .truncate').should('have.text', ' Merchant ')

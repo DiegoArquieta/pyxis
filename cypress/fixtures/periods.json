@@ -1,0 +1,8 @@
+{
+    "PERIODS": [
+      { "key": "Latest 4 Weeks", "value": "Latest 4 Weeks" },
+      { "key": "Latest Month", "value": "Latest Month" },
+      { "key": "Latest 52 weeks", "value": "Latest 52 weeks" },
+      { "key": "Latest 12 weeks", "value": "Latest 12 weeks" }
+    ]
+  }
