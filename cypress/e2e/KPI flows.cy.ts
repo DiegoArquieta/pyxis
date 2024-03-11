@@ -65,7 +65,6 @@ describe('Test all the KPI functionality', () => {
     }
   });
   
-
   it('Add "N" KPIs', () => {
     let numberOfRuns = 5;
     for (let i = 0; i < numberOfRuns; i++) {

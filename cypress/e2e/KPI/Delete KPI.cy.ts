@@ -1,11 +1,11 @@
-import {addReport, login, logout, createReportbutton} from '../support/pom.ts'
+import { login, removeKPI, logout } from '../../support/pom.ts'
 let username = Cypress.env('user_name')
 let password = Cypress.env('user_pass')
 let url = Cypress.env('pyxisdev')
 let urlQA = Cypress.env('pyxisqa')
 
 
-describe('Create Top Overview report', () => {
+describe('Test all the KPI functionality', () => {
   beforeEach(() => {
     // run these tests as if in a desktop
     // browser with a 1080p monitor
@@ -22,11 +22,20 @@ describe('Create Top Overview report', () => {
     }
     logout()
   });
+  it('Remove "N" numbers of KPI, by deleting the first one several times', () => {
+    try {
+      let numberOfRuns = 10;
+      for (let i = 0; i < numberOfRuns; i++) {
+        cy.wait(8000)
+        removeKPI()
+    cy.visit(urlQA)
+    cy.wait(8000)
+    }
+   } catch (error) {
+      // Handle the error, log it, or perform any other necessary action
+      cy.log(`Error: ${error.message}`);
+    }
+  
 
-  it('Create Top Product report', () => {
-    // Select the type of report and which one to build
-    createReportbutton('Create from template', ' Top Product Overview ');
-    cy.wait(15000)
-    addReport('Test Orion Apparel Activewear Online', 'Lululemon', 'Latest 12 Weeks');
   })
 })
