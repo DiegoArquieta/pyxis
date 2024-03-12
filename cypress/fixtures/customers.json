@@ -1,0 +1,20 @@
+{
+    "PYXIS_MERCHANT": [
+        {
+            "vl_cd": "Alo Yoga",
+            "vl_nm": "Alo Yoga"
+        },
+        {
+            "vl_cd": "Lululemon",
+            "vl_nm": "Lululemon"
+        },
+        {
+            "vl_cd": "Nike",
+            "vl_nm": "Nike"
+        },
+        {
+            "vl_cd": "Under Armour",
+            "vl_nm": "Under Armour"
+        }
+    ]
+}
