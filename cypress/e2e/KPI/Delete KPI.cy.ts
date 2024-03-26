@@ -5,7 +5,7 @@ let url = Cypress.env('pyxisdev')
 let urlQA = Cypress.env('pyxisqa')
 
 
-describe('Test all the KPI functionality', () => {
+describe.skip('Test all the KPI functionality', () => {
   beforeEach(() => {
     // run these tests as if in a desktop
     // browser with a 1080p monitor

@@ -54,7 +54,7 @@ describe('Test all the KPI functionality', () => {
     }
   });
 
-  it.skip('Go to dashboard and validate that you need the minimum requirements for a KPI(Metrics missing)', () => {
+  it('Go to dashboard and validate that you need the minimum requirements for a KPI(Metrics missing)', () => {
     try {
       // KPI parameters so far: Merchant, Period, and Metrics
       addKPI('Test Orion Apparel Activewear Online', 'Under Armour', 'Latest 4 weeks', '');

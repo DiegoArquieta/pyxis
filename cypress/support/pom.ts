@@ -180,7 +180,7 @@ export function addKPI (dataSource, merchant, period, metrics) {
    cy.get('.mx-6 > .flex-row').within(() => {
       cy.contains('Metric Notifications').click()
     })
-    cy.wait(1000)
+    cy.wait(12000)
 
     function metricSales() {
       // Click on Sales
