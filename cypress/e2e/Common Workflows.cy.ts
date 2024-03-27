@@ -1,4 +1,4 @@
-import {topMenu, login, logout, accountSettings, createReportbutton, addReport} from '../support/pom.ts'
+import {topMenu, login, logout, accountSettings} from '../support/pom.ts'
 let username = Cypress.env('user_name')
 let password = Cypress.env('user_pass')
 let url = Cypress.env('pyxisdev')
