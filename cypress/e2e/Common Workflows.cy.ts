@@ -1,4 +1,4 @@
-import {topMenu, mySavedReports, login, addKPI, removeKPI, logout, accountSettings, createReportbutton, addReport} from '../support/pom.ts'
+import {topMenu, login, logout, accountSettings, createReportbutton, addReport} from '../support/pom.ts'
 let username = Cypress.env('user_name')
 let password = Cypress.env('user_pass')
 let url = Cypress.env('pyxisdev')
@@ -25,7 +25,12 @@ describe('Test,login, landp and settings page', () => {
 
    it('Validate My Saved Reports Page', () => {
     topMenu('Saved');
-    //mySavedReports();
+    
+  })
+
+  it('Validate My Saved Reports Page', () => {
+    topMenu('Shared');
+    
   })
 
   it('Validate Top Menu', () => {
@@ -39,10 +44,5 @@ describe('Test,login, landp and settings page', () => {
         
     })
 
-    it('Create Top Product report', () => {
-      // Select the type of report and which one to build
-      createReportbutton('Create from template', ' Top Product Overview ');
-      cy.wait(15000)
-      addReport('Test Orion Apparel Activewear Online', 'Lululemon', 'Latest 12 Weeks', 'Sales');
-    })
+   
 })

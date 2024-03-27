@@ -24,12 +24,12 @@ describe('Test all the KPI functionality', () => {
   });
 
   it('Go to dashboard and add a KPI with minimun requirements', () => {
-    // KPI parameters so far: Merchant, Period and Metrics
+    // KPI parameters so far: Data Source, Merchant, Period and Metrics
     addKPI('Test Orion Apparel Activewear Online', 'Lululemon', 'Latest Month', 'Sales');
     cy.wait(15000)
   })
   it('Go to dashboard and add a KPI with minimun requirements', () => {
-    // KPI parameters so far: Merchant, Period and Metrics
+    // KPI parameters so far: Data Source, Merchant, Period and Metrics
     addKPI('Test Orion Apparel Activewear Online', 'Nike', 'Latest 52 Weeks', 'Units');
     cy.wait(15000)
   })
@@ -66,6 +66,7 @@ describe('Test all the KPI functionality', () => {
   });
   
   it('Add "N" KPIs', () => {
+    //Enter here how many KPI would you like to create
     let numberOfRuns = 5;
     for (let i = 0; i < numberOfRuns; i++) {
       // KPI parameters so far: Merchant, Period, and Metrics
@@ -75,7 +76,7 @@ describe('Test all the KPI functionality', () => {
   })
   
   it('Remove "N" numbers of KPI, by deleting the first one several times', () => {
-  
+  //Enter here how many KPI you want to delete. Take into consideration how many are already, otherwise is gonna fail.
   let numberOfRuns = 4;
     for (let i = 0; i < numberOfRuns; i++) {
       cy.wait(8000)

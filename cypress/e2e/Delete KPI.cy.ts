@@ -1,4 +1,4 @@
-import { login, addKPI, addKPI2, removeKPI, logout } from '../support/pom.ts'
+import { login, removeKPI, logout } from '../support/pom.js'
 let username = Cypress.env('user_name')
 let password = Cypress.env('user_pass')
 let url = Cypress.env('pyxisdev')
@@ -22,16 +22,20 @@ describe.skip('Test all the KPI functionality', () => {
     }
     logout()
   });
-
-  it('Go to dashboard and validate that you need the minimum requirements for a KPI(Merchant missing)', () => {
+  it('Remove "N" numbers of KPI, by deleting the first one several times', () => {
     try {
-      // KPI parameters so far: Merchant, Period, and Metrics
-      addKPI2('Nik', 'Latest 4 weeks', 'Sales');
-      cy.wait(15000);
-    } catch (error) {
+      let numberOfRuns = 10;
+      for (let i = 0; i < numberOfRuns; i++) {
+        cy.wait(8000)
+        removeKPI()
+    cy.visit(urlQA)
+    cy.wait(8000)
+    }
+   } catch (error) {
       // Handle the error, log it, or perform any other necessary action
       cy.log(`Error: ${error.message}`);
     }
-  });
-       
+  
+
+  })
 })
