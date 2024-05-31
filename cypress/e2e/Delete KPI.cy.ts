@@ -1,4 +1,4 @@
-import { login, removeKPI, logout } from '../support/pom.js'
+import { login, removeKPI, logout } from '../support/pom.ts'
 let username = Cypress.env('user_name')
 let password = Cypress.env('user_pass')
 let url = Cypress.env('pyxisdev')

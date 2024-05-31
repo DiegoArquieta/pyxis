@@ -27,7 +27,7 @@ describe('Create Top Overview report', () => {
     // Select the type of report and which one to build
     createReportbutton('Create from template', ' Top Product Overview ');
     cy.wait(15000)
-    addReport('Test Orion Apparel Activewear Online', 'Lululemon', 'Latest 12 Weeks');
+    addReport(' Test - Apparel Online - Jeans ', 'Asos', 'Latest 12 Weeks');
   })
 
   

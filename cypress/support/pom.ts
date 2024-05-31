@@ -25,6 +25,7 @@ export function login(username, password){
    //.should('be.visible')
    cy.get('span.text-3xl.font-bold')
    .should('be.visible').and('have.text', 'Welcome, Diego')
+   //cy.contains('pendo-close-guide').click()
   }
 
 export function logout(){
@@ -64,26 +65,29 @@ export function mySavedReports (){
 
 export function topMenu (menuOption) {
     cy.get('.flex.flex-nowrap.justify-between.px-5.py-3.items-center').should('be.visible')
-    cy.get('div.m-auto > img').should('be.visible')
+    cy.get('.my-auto').should('be.visible')
     cy.get('.flex.flex-nowrap.justify-between.px-5.py-3.items-center')
     //cy.get('[ng-reflect-router-link="/assets/saved"]').should('be.visible').and('have.text', 'My Saved Reports')
-    cy.get('.justify-left > :nth-child(3)').should('be.visible').and('have.text', 'My Saved Reports')
-    cy.get('.justify-left > :nth-child(4)').should('be.visible').and('have.text', 'Shared With Me')
+    cy.get('app-link-renderer[tabindex="0"]').should('be.visible').and('have.text', 'My Saved ReportsShared With Me')
+    //cy.get('.px-5 > :nth-child(3)').should('be.visible').and('have.text', 'Shared With Me')
     //cy.get('[ng-reflect-router-link="/assets/shared"]').should('be.visible').and('have.text', 'Shared With Me')
     cy.get('[data-cy="notification-icon-btn"] > .flex > img').should('be.visible')
-    cy.get('.help-icon-btn > .flex > img').should('be.visible')
+    cy.get('app-help-button[subject="header.helpEmailSubject"]').should('be.visible')
     cy.get('.ml-auto > lib-dropdown > .flex-col > .px-3 > div.flex > .text-sm').should('be.visible')
     cy.get('lib-dropdown.m-auto > .flex-col > .px-3').should('be.visible').and('have.text', ' Create New Report ')
 
     // Parameter-based logic
   if (menuOption === 'Saved') {
     //cy.get('[ng-reflect-router-link="/assets/saved"]')
-    cy.get('.justify-left > :nth-child(3)').should('be.visible').and('have.text', 'My Saved Reports').click();
+    //cy.get('.justify-left > :nth-child(3)').should('be.visible').and('have.text', 'My Saved Reports').click();
+    cy.get('app-link-renderer').contains('My Saved Reports').click();
     cy.get('.justify-between > .text-3xl').should('be.visible').and('have.text', ' My Saved Reports ')
   } else if (menuOption === 'Shared') {
     //cy.get('[ng-reflect-router-link="/assets/shared"]')
-    cy.get('.justify-left > :nth-child(4)').should('be.visible').and('have.text', 'Shared With Me').click();
-    // Add code for handling "Shared" case
+    //cy.get('.justify-left > :nth-child(4)').should('be.visible').and('have.text', 'Shared With Me').click();
+    cy.get('app-link-renderer').contains('Shared With Me').click();
+    cy.get(':nth-child(1) > .text-3xl').should('be.visible').and('have.text', ' Shared With Me ')
+
   } else {
      // Handle other cases or provide a default behavior
     // You can also log a message for an unsupported parameter
@@ -157,7 +161,7 @@ export function addKPI (dataSource, merchant, period, metrics) {
     }
 })
     //cy.contains('ALO YOGA').click( {force: true})
-    cy.get('.mx-6 > .flex-row').within(() => {
+    cy.get('[data-cy="Period"]').within(() => {
     cy.contains('Period').click()
   })
   cy.wait(5000)
@@ -177,7 +181,7 @@ export function addKPI (dataSource, merchant, period, metrics) {
     });
 });
    //Select Metric notifications on the Data Source meu
-   cy.get('.mx-6 > .flex-row').within(() => {
+   cy.get('[data-cy="Metric Notifications"]').within(() => {
       cy.contains('Metric Notifications').click()
     })
     cy.wait(12000)
@@ -231,7 +235,7 @@ export function addKPI (dataSource, merchant, period, metrics) {
 
     }
     //Validate selections made
-    cy.get(':nth-child(1) > .flex-wrap > .flex > .text-primary-800').should('have.text', 'Test Orion Apparel Activewear Online')
+    cy.get(':nth-child(1) > .flex-wrap > .flex > .text-primary-800').should('have.text', 'Test - Apparel Online - Jeans')
     cy.get(':nth-child(2) > button.flex > .truncate').should('have.text', ' Merchant ')
     // The expected text you want to validate
 const expectedText = nameMerchant;
@@ -251,7 +255,7 @@ cy.get(':nth-child(2) > .flex-wrap').invoke('text').then((actualText) => {
 
 export function removeKPI () {
 
-    cy.get('#cdk-drop-list-1').within(() => {
+  cy.get('button.kpi-menu-icon').within(() => {
       cy.get('.kpi-menu-icon.bg-transparent').click();
       cy.contains('Delete KPI').click()
       cy.wait(2000)
@@ -332,9 +336,9 @@ export function addReport (dataSource, merchant, period) {
       }
   });
     //cy.contains('ALO YOGA').click( {force: true})
-    cy.get('.mx-6 > .flex-row').within(() => {
-    cy.contains('Period').click()
-  })
+    cy.get('[data-cy="Period"]').within(() => {
+      cy.contains('Period').click()
+    })
   cy.wait(5000)
   let namePeriod = period
   cy.fixture('periods.json').then((data) => {
@@ -352,7 +356,7 @@ export function addReport (dataSource, merchant, period) {
     });
 });
     //Validate selections made
-    cy.get(':nth-child(1) > .flex-wrap > .flex > .text-primary-800').should('have.text', 'Test Orion Apparel Activewear Online')
+    cy.get(':nth-child(1) > .flex-wrap > .flex > .text-primary-800').should('have.text', 'Test - Apparel Online - Jeans')
     cy.get(':nth-child(2) > button.flex > .truncate').should('have.text', ' Merchant ')
     // The expected text you want to validate
 const expectedText = nameMerchant;
@@ -370,7 +374,7 @@ cy.get(':nth-child(2) > .flex-wrap').invoke('text').then((actualText) => {
     cy.get('.flex > .text-3xl').should('have.text', ' Top Product Overview ')
     cy.wait(15000)
     //Top product elements
-    cy.get('.flex-wrap').should('have.text', ' Rank top performing products across selected characteristics and deep dive into individual products to see their sales and price trends over time\n')
+    cy.get('.flex-wrap').should('have.text', ' See top performing products across selected characteristics and deep dive into individual products to see their sales and price trends over time\n')
     cy.get('[data-cy="pin-button"] > .bg-white').should('be.visible') 
     cy.get('[data-cy="share-with-me-remove-button"] > .bg-white').should('be.visible')
     cy.contains('Save Report').should('be.visible')
